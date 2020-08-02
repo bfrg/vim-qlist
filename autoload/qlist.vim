@@ -68,11 +68,11 @@ function! qlist#Qlist(command, selection, start_at_cursor, force, ...)
     call setqflist(qf_entries)
 
     " Open the quickfix window if there is something to show.
-    if exists("g:loaded_qf")
-        doautocmd QuickFixCmdPost cwindow
+    if exists('#QuickFixCmdPost')
+        doautocmd <nomodeline> QuickFixCmdPost grep
     else
         cclose
-        execute min([ 10, len(getqflist()) ]) 'cwindow'
+        execute min([10, len(getqflist())]) 'cwindow'
     endif
 
     " Add proper feedback to the statusline.
